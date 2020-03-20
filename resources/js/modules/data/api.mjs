@@ -90,6 +90,7 @@ function fetchArtists(input, token) {
 }
 
 async function fetchArtistNameById(artistId, token) {
+
     const requestType = "GET";
     const finalUrl = `https://api.spotify.com/v1/artists/${artistId}`;
 
@@ -304,4 +305,6 @@ async function fetchItemsByItemIds(token, itemType, ids) {
     });
 }
 
-export { fetchToken, fetchArtists, fetchArtistNameById, fetchAlbumsByArtistId, fetchByUrl, fetchAlbumsByAlbumIds, fetchItemsByItemIds };
+module.exports = {
+    fetchToken, fetchArtists, fetchArtistNameById, fetchAlbumsByArtistId, fetchByUrl, fetchAlbumsByAlbumIds, fetchItemsByItemIds
+};

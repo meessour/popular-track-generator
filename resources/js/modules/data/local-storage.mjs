@@ -34,4 +34,6 @@ function setTokenInLocalStorage(accessToken, expiresIn) {
     }
 }
 
-export { getTokenFromLocalStorage, setTokenInLocalStorage };
+module.exports = {
+    getTokenFromLocalStorage, setTokenInLocalStorage
+};
