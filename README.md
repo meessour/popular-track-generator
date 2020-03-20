@@ -8,7 +8,7 @@ The code of the project used was from the 13th of march. The code from the origi
 
 ## Demo's
 
-[Live Demo](https://meessour.github.io/progressive-web-apps-1920/) [Not working]
+[Live Demo](https://meessour.github.io/progressive-web-apps-1920/)
 
 ## Licence
 MIT © [Mees Sour](https://github.com/meessour)
