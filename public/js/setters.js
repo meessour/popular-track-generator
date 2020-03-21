@@ -1,4 +1,4 @@
-const templateEngine = require("./template-engine.mjs");
+const templateEngine = require('../../modules/template-engine.js');
 
 const mostPopularTracks = document.getElementById("most-popular-tracks");
 const searchResult = document.getElementById("search-result");
@@ -24,6 +24,4 @@ function setMostPopularTracks(tracks) {
     mostPopularTracks.innerHTML = tracksHtml;
 }
 
-module.exports = {
-    setArtistSearchResults, setMostPopularTracks
-};
+module.exports = {setArtistSearchResults, setMostPopularTracks};

@@ -3,7 +3,6 @@ function getArtistSearchResultsTemplate(artists) {
 
     let html = "";
 
-    console.log("artist", artists);
     for (let i = 0; i < artists.length; i++) {
         const artist = artists[i]
         html +=
@@ -129,6 +128,4 @@ function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 }
 
-module.exports = {
-    getArtistSearchResultsTemplate, getMostPopularTracksTemplate
-};
+module.exports = { getArtistSearchResultsTemplate, getMostPopularTracksTemplate };

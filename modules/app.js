@@ -1,7 +1,7 @@
-const getters = require("./modules/data/getters.mjs");
-const setters = require("./modules/ui/setters.mjs");
-const userFeedback = require("./modules/ui/user-feedback.mjs");
-const changeUi = require("./modules/change-ui.mjs");
+const getters = require("./getters.js");
+const setters = require("../public/js/setters.js");
+const userFeedback = require("../public/js/user-feedback.js");
+const changeUi = require("./server-modules/change-ui.mjs");
 
 // Routie, a routing library
 import './libraries/routie.min.js';
@@ -20,7 +20,7 @@ artistsNameInput.addEventListener("input", function () {
 
             setters.setArtistSearchResults(artist);
         } catch (error) {
-            userFeedback.setUserFeedback(error);
+            // userFeedback.setUserFeedback(error);
 
             changeUi.clearSearchBar();
             changeUi.clearSearchResults();
@@ -50,9 +50,9 @@ routie(':id', function (id) {
         setters.setMostPopularTracks(mostPopularTracks);
 
         // Inform the user that everything went successful and how many tracks were set
-        userFeedback.stopLoadingFeedback(`Showing most popular tracks for: ${artist}`, `${tracks.length} tracks loaded`, false);
+        // userFeedback.stopLoadingFeedback(`Showing most popular tracks for: ${artist}`, `${tracks.length} tracks loaded`, false);
     } catch (error) {
         console.log("error:", error);
-        userFeedback.stopLoadingFeedback(error, "", true);
+        // userFeedback.stopLoadingFeedback(error, "", true);
     }
 });

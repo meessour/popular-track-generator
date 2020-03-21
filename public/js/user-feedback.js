@@ -89,6 +89,4 @@ function showFeedbackError(messageTitle, messageText = "") {
     userFeedbackContainer.classList.add("show-user-feedback");
 }
 
-module.exports = {
-    setUserFeedback, startLoadingFeedback, stopLoadingFeedback, setLoadingFeedbackTitle, setLoadingFeedbackText
-};
+module.exports = { setUserFeedback, startLoadingFeedback, stopLoadingFeedback, setLoadingFeedbackTitle, setLoadingFeedbackText };

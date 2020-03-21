@@ -15,6 +15,5 @@ function clearTrackResults() {
     mostPopularTracks.innerHTML = "";
 }
 
-module.exports = {
-    clearSearchBar, clearSearchResults, clearTrackResults
-};
+module.exports = { clearSearchBar, clearSearchResults, clearTrackResults };
+
