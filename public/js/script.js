@@ -1,8 +1,18 @@
 $(() => {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/js/service-worker.js')
+                .then(function (registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    return registration.update();
+                });
+        });
+    }
+
     // Init START
     const artistId = window.location.hash.substring(1);
 
-    if (artistId){
+    if (artistId) {
         lookupArtist(artistId);
     }
     // Init END

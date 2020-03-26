@@ -1,5 +1,12 @@
+const https = require('https');
+var fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
+
+var privateKey = fs.readFileSync('./key.pem');
+var certificate = fs.readFileSync('./cert.pem');
+
+var credentials = {key: privateKey, cert: certificate};
 
 const get = require('./modules/get');
 const api = require('./modules/api');
@@ -15,7 +22,14 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-var server = app.listen(8080, () => {
+var httpsServer = https.createServer(credentials, app);
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 8000;
+}
+
+var server = httpsServer.listen(port, () => {
     console.log("Server is listening on port", server.address().port);
 });
 
