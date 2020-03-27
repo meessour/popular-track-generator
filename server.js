@@ -1,4 +1,4 @@
-const https = require('https');
+// const https = require('https');
 var fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -22,16 +22,17 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-var httpsServer = https.createServer(credentials, app);
-
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 8000;
 }
 
-var server = httpsServer.listen(port, () => {
-    console.log("Server is listening on port", server.address().port);
-});
+app.listen(port);
+
+
+// var server = app.listen(port, () => {
+//     console.log("Server is listening on port", server.address().port);
+// });
 
 app.get('/artistId', (req, res) => {
     const artistId = req.query.artistId;
