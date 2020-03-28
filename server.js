@@ -2,6 +2,7 @@ const http = require('http');
 var fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
+const enforce = require('express-sslify');
 
 var privateKey = fs.readFileSync('./key.pem');
 var certificate = fs.readFileSync('./cert.pem');
