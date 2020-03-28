@@ -8,6 +8,19 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Remember the not yet fired install prompt
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", function (e) {
+    console.log("Install????");
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    // Update UI notify the user they can install the PWA
+    showInstallPromotion();
+})
+
 $(() => {
     // Init START
     const artistId = window.location.hash.substring(1);
@@ -24,23 +37,11 @@ $(() => {
         lookupArtist(artistId);
     });
 
-    // Remember the not yet fired install prompt
-    let deferredPrompt;
-    let deferredPromp2t;
 
-    $(window).on('beforeinstallprompt', function (e) {
-        console.log("Install????");
-        // Prevent the mini-infobar from appearing on mobile
-        e.preventDefault();
-        // Stash the event so it can be triggered later.
-        deferredPrompt = e;
-        // Update UI notify the user they can install the PWA
-        showInstallPromotion();
-    });
 
     $("#install-app").on("click", function () {
         // Hide the app provided install promotion
-        hideMyInstallPromotion();
+        hideInstallPromotion();
         // Show the install prompt
         deferredPrompt.prompt();
         // Wait for the user to respond to the prompt
@@ -96,6 +97,11 @@ $(() => {
     function showInstallPromotion() {
         $("#install-app").removeClass("hidden");
     }
+
+    function hideInstallPromotion() {
+        $("#install-app").addClass("hidden");
+    }
+
     function clearSearchBar() {
         $("#artist-name-input").val("");
     }
