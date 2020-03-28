@@ -1,4 +1,4 @@
-// const https = require('https');
+const http = require('http');
 var fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -27,12 +27,14 @@ if (port == null || port == "") {
     port = 8000;
 }
 
-app.listen(port);
+// Enforce https when on Heroku
+if (app.get("env") === "production") {
+    app.use(enforce.HTTPS({trustProtoHeader: true}));
+}
 
-
-// var server = app.listen(port, () => {
-//     console.log("Server is listening on port", server.address().port);
-// });
+http.createServer(app).listen(port, () => {
+    console.log("Server is listening on port", port);
+})
 
 app.get('/artistId', (req, res) => {
     const artistId = req.query.artistId;
@@ -96,3 +98,24 @@ app.get('/', (req, res) => {
 function isString(value) {
     return value && value !== "" && value.length > 0 && value.trim().length > 0;
 }
+
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    console.log("error occured")
+    next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error', {title: `Error ${err.status}`});
+});
+
+
+module.exports = app;

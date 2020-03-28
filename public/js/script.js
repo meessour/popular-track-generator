@@ -1,14 +1,14 @@
-$(() => {
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('/js/service-worker.js')
-                .then(function (registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    return registration.update();
-                });
-        });
-    }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/js/service-worker.js')
+            .then(function (registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                return registration.update();
+            });
+    });
+}
 
+$(() => {
     // Init START
     const artistId = window.location.hash.substring(1);
 
@@ -22,6 +22,35 @@ $(() => {
         const artistId = window.location.hash.substring(1);
 
         lookupArtist(artistId);
+    });
+
+    // Remember the not yet fired install prompt
+    let deferredPrompt;
+    let deferredPromp2t;
+
+    $(window).on('beforeinstallprompt', function (e) {
+        console.log("Install????");
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI notify the user they can install the PWA
+        showInstallPromotion();
+    });
+
+    $("#install-app").on("click", function () {
+        // Hide the app provided install promotion
+        hideMyInstallPromotion();
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+        })
     });
 
     $("#artist-name-input").on("input", function () {
@@ -64,6 +93,9 @@ $(() => {
         return value && value !== "" && value.length > 0 && value.trim().length > 0;
     }
 
+    function showInstallPromotion() {
+        $("#install-app").removeClass("hidden");
+    }
     function clearSearchBar() {
         $("#artist-name-input").val("");
     }

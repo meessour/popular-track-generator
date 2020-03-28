@@ -48,6 +48,10 @@ p {
     display: none !important;
 }
 
+/*.install-app-button{*/
+/*    display: none*/
+/*}*/
+
 .main-content {
     color: var(--white);
     font-weight: bold;

@@ -10,17 +10,17 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
     console.log('Service worker install event!');
-    // event.waitUntil(
-    //   caches.open(CACHE_NAME)
-    //     .then(cache => {
-    //       return cache.addAll(urlsToCache).then(() => self.skipWaiting);
-    //     })
-    // );
+    event.waitUntil(
+      caches.open(CACHE_NAME)
+        .then(cache => {
+          return cache.addAll(urlsToCache).then(() => self.skipWaiting);
+        })
+    );
   });
 
   self.addEventListener('activate', (event) => {
-    console.log('Servive worker activated!')
-    // event.waitUntil(clients.claim())
+    console.log('Servive worker activated!');
+    event.waitUntil(clients.claim());
   })
 
   self.addEventListener('fetch', (event) => {
