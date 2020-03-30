@@ -4,6 +4,7 @@
   "description": "[Live Demo](https://meessour.github.io/web-app-from-scratch-1920/)",
   "main": "server.js",
   "scripts": {
+    "build": "gulp",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
@@ -29,6 +30,13 @@
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
-    "spdy": "^4.0.1"
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "latest",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-less": "^4.0.1",
+    "gulp-svgmin": "^2.2.0",
+    "gulp-terser": "^1.2.0"
   }
 }

@@ -13,26 +13,13 @@ const icons = [
     '/css/loading-animation.svg'
 ];
 
-const fonts = [
-    '/fonts/Montserrat-Thin.ttf',
-    '/fonts/Montserrat-ExtraLight.ttf',
-    '/fonts/Montserrat-Light.ttf',
-    '/fonts/Montserrat-Regular.ttf',
-    '/fonts/Montserrat-Medium.ttf',
-    '/fonts/Montserrat-SemiBold.ttf',
-    '/fonts/Montserrat-Bold.ttf',
-    '/fonts/Montserrat-ExtraBold.ttf',
-    '/fonts/Montserrat-Black.ttf'
-];
-
 const urlsToCache = [
     '/',
     '/manifest.webmanifest',
     '/css/styles.css',
-    '/css/font.css',
     '/js/script.js',
     '/js/user_feedback.js'
-].concat(icons).concat(fonts);
+].concat(icons);
 
 self.addEventListener('install', (event) => {
     console.log('Service worker install event!');

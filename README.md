@@ -240,7 +240,7 @@ I scored 86 on this.
 
 </details>
 
-The first thing that could be imporved has to do with safety. A track can be clicked and the user will be redirected to the page of that site in a new tab with: ```target="_blank"```. This will expose my site to performance and security issues. 
+The first thing that could be improved has to do with safety. A track can be clicked and the user will be redirected to the page of that site in a new tab with: ```target="_blank"```. This will expose my site to performance and security issues. 
 
 These are some issues (source: https://web.dev/external-anchors-use-rel-noopener/?utm_source=lighthouse&utm_medium=devtools
 ):
@@ -259,6 +259,123 @@ rel="noopener"></a>
 ```
 
 Now the score is 93.
+
+The other best practice is to use the HTTP/2 protocol. HTTP/2 offers many benefits over HTTP/1.1, including binary headers, multiplexing, and server push. Currently there is no way to do this using express in a nodejs server (source: https://stackoverflow.com/questions/28639995/node-js-server-and-http-2-2-0-with-express-js). So I will be ignoring this optimisation.
+
+###SEO
+
+My SEO score is 89
+
+<details>
+<summary>SEO result before</summary>
+
+![Install app](./public/images/seo-before.png)
+
+</details>
+
+I don't have a meta description right now. This is used to sum up the content of the page. This way my page will look more relevant and can increase search traffic (source: https://web.dev/meta-description/?utm_source=lighthouse&utm_medium=devtools)
+
+####Best Practices
+
+Here are some good practices used for a meta description
+
+<details>
+<summary>Best Practices</summary>
+
+![Install app](./public/images/meta-name-best-practices.png)
+
+</details>
+
+Because of this i chose to use this as my description: "Search for an artist on Spotify and generate a list with the most popular songs of that artist." I sum up the website's goal and use keywords that will be searched on, like: "Spotify", "generate" en "most popular".
+
+I added this line to my `html`:
+
+```html
+<meta
+  name="description"           
+  content="Search for an artist on Spotify and generate a list with the most popular songs of that artist.">
+```
+
+##Optimize the performance (Critical Rendering Path)
+
+The first thing I did in order to improve the critical render path was to add defer tags to the scripts.
+```html
+    <!-- jquery -->
+    <script defer src="/js/jquery-3.4.1.min.js"></script>
+
+    <script defer type="module" src="/js/script.js"></script>
+    <script defer type="module" src="/js/user_feedback.js"></script>
+```
+<details>
+<summary>Before Defer</summary>
+
+![Install app](./public/images/before-defer.png)
+
+</details>
+
+<details>
+<summary>After Defer</summary>
+
+![Install app](./public/images/after-defer.png)
+
+</details>
+
+I managed to improve it by 0.5s.
+
+I minified all the files using gulp and put them in a folder called "build". Then I chagned the path to the static files in the server.js file.
+
+From
+```javascript
+app.use(express.static('public'))
+```
+
+To
+```javascript
+app.use(express.static('build'))
+```
+
+I also let express minify the html. This way the ejs files are less big.
+```javascript
+app.use(minifyHtml({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}))
+```
+
+I added a preload attribute to a style sheet from the third party. When the scripts finally loads, it will change the relationship to stylesheet.
+````html
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+          rel="preload"
+          as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+````
+
+Sometimes there can be more than 1000 track results. The server sends back a large string with html and puts this inside a container. I used the following function to minify the file (source: https://stackoverflow.com/questions/22497779/convert-html-node-to-one-line-stringminify):
+
+```javascript
+function minifyHtml(html) {
+    return html.replace(/(\r\n|\n|\r)/gm, '');
+}
+```
+
+Surprisingly, after these improvements the Performance speed did not improve. But the size of the files are less large now
+
+Here is a look at the final score on both desktop and mobile
+
+<details>
+<summary>Final score</summary>
+
+![Install app](./public/images/final-result.png)
+
+</details>
 
 ## Licence
 MIT © [Mees Sour](https://github.com/meessour)

@@ -16,17 +16,18 @@ function getArtistSearchResultsTemplate(artists) {
         }
 
         html +=
-            `<div class="artist-description">
-                    <h4 class="artist-name">${artist.name}</h4>
-                    <div class="followers">
-                        <img alt="People in a group icon" class="artist-result-icon" src="/icons/group-24px.svg">
-                        <p class="artist-followers">${formatNumber(artist.followers.total)}</p>
-                    </div> 
-                </div>
-            </a>`;
+            `
+<div class="artist-description">
+<h4 class="artist-name">${artist.name}</h4>
+<div class="followers">
+<img alt="People in a group icon" class="artist-result-icon" src="/icons/group-24px.svg">
+<p class="artist-followers">${formatNumber(artist.followers.total)}</p>
+</div> 
+</div>
+</a>`;
     }
 
-    return html;
+    return minifyHtml(html);
 }
 
 function getMostPopularTracksTemplate(tracks) {
@@ -52,31 +53,34 @@ function getMostPopularTracksTemplate(tracks) {
 
         html +=
             `
-        <div class="track-container">
-            <div class="track-item" >
-                <h4 class="track-list-position ${(characterWidthClass)}">${(i + 1)}</h4>
-                <img alt="Song/album cover related to the song: ${track.name}" class="track-picture" src=${track.album && track.album.images[0] ? track.album.images[(track.album.images.length - 1)].url : ""} />
-                <div class="track-description">
-                    <p class="track-name">${track.name}</p>
-                </div>
-            </div>
-        `
+<div class="track-container">
+<div class="track-item" >
+<h4 class="track-list-position ${(characterWidthClass)}">${(i + 1)}</h4>
+<img alt="Song/album cover related to the song: ${track.name}" class="track-picture" src=${track.album && track.album.images[0] ? track.album.images[(track.album.images.length - 1)].url : ""} />
+<div class="track-description">
+<p class="track-name">${track.name}</p>
+</div>
+</div>`
 
         html +=
             `
-                <a class="track-action" href=${track.external_urls.spotify} target="_blank" rel="noopener"> 
-                    <img alt="Redirect to spotify in order to view the song" class="track-action-icon" src="/icons/launch-24px.svg">
-                </a>
-        </div>
-        `;
+<a class="track-action" href=${track.external_urls.spotify} target="_blank" rel="noopener">
+<img alt="Redirect to spotify in order to view the song" class="track-action-icon" src="/icons/launch-24px.svg">
+</a>
+</div>`;
     }
 
-    return html;
+    return minifyHtml(html);
 }
 
 // Used to add decimal points (dots) between every third number of a number
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+}
+
+// Used to minify the HTML. This way the file is less large
+function minifyHtml(html) {
+    return html.replace(/(\r\n|\n|\r)/gm, '');
 }
 
 module.exports = {getArtistSearchResultsTemplate, getMostPopularTracksTemplate};

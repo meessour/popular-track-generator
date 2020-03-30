@@ -1,4 +1,4 @@
-const spdy = require('spdy');
+const http = require('http');
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,17 +11,11 @@ const api = require('./modules/api');
 const parser = require('./modules/parser');
 const templateEngine = require('./modules/template-engine');
 
-// Private SSL keys
-var privateKey = fs.readFileSync('./key.pem');
-var certificate = fs.readFileSync('./cert.pem');
-
-var credentials = {key: privateKey, cert: certificate};
-
 const app = express();
 
 app.set('view engine', 'ejs')
     .set('views', 'views')
-    .use(express.static('public'))
+    .use(express.static('build'))
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
 .use(minifyHtml({
@@ -38,7 +32,6 @@ app.set('view engine', 'ejs')
 }))
 ;
 
-
 // Enforce https when on Heroku
 if (app.get("env") === "production") {
     app.use(enforce.HTTPS({trustProtoHeader: true}));
@@ -46,7 +39,7 @@ if (app.get("env") === "production") {
 
 const port = process.env.PORT || 8000;
 
-spdy.createServer(credentials, app).listen(port, () => {
+http.createServer(app).listen(port, () => {
     console.log("Server is listening on port", port);
 });
 
