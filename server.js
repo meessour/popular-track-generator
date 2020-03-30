@@ -1,41 +1,58 @@
 const http = require('http');
-var fs = require('fs');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const enforce = require('express-sslify');
+const minifyHtml = require('express-minify-html');
 
-var privateKey = fs.readFileSync('./key.pem');
-var certificate = fs.readFileSync('./cert.pem');
-
-var credentials = {key: privateKey, cert: certificate};
-
+// The modules
 const get = require('./modules/get');
 const api = require('./modules/api');
 const parser = require('./modules/parser');
 const templateEngine = require('./modules/template-engine');
 
+// Private SSL keys
+var privateKey = fs.readFileSync('./key.pem');
+var certificate = fs.readFileSync('./cert.pem');
+
+var credentials = {key: privateKey, cert: certificate};
+
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', 'views');
-app.use(express.static('public'));
+app.set('view engine', 'ejs')
+    .set('views', 'views')
+    .use(express.static('public'))
+    .use(bodyParser.json())
+    .use(bodyParser.urlencoded({extended: true}))
+.use(minifyHtml({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}))
+;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
-
-let port = process.env.PORT;
-if (port == null || port == "") {
-    port = 8000;
-}
 
 // Enforce https when on Heroku
 if (app.get("env") === "production") {
     app.use(enforce.HTTPS({trustProtoHeader: true}));
 }
 
+const port = process.env.PORT || 8000;
+
 http.createServer(app).listen(port, () => {
     console.log("Server is listening on port", port);
-})
+});
+
+app.get('/offline', (req, res) => {
+    res.render('offline');
+});
 
 app.get('/artistId', (req, res) => {
     const artistId = req.query.artistId;
@@ -46,7 +63,7 @@ app.get('/artistId', (req, res) => {
         }).catch(error => {
             console.log("iets ging mis:", error);
 
-            res.status(500)
+            res.status(500);
             res.send("No ID given");
 
             // res.render('error artistId', {error: error});
@@ -80,43 +97,16 @@ app.get('/', (req, res) => {
             res.send(artists);
         })
             .catch(error => {
-                res.status(500)
-                res.render('error', {error: error});
+                res.status(500);
+                res.send('error');
             });
 
     } else {
         res.render('index.ejs', {artists: [], tracks: []});
     }
-})
-
-// app.get('/#artist', (req, res) => {
-//     var artist = req.params.artist
-//     console.log("Artist:", artist);
-//
-// })
+});
 
 // check if value is a valid string with content
 function isString(value) {
     return value && value !== "" && value.length > 0 && value.trim().length > 0;
 }
-
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    console.log("error occured")
-    next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error', {title: `Error ${err.status}`});
-});
-
-
-module.exports = app;

@@ -14,7 +14,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, Arial, sans-serif;
 }
 
 body,
@@ -27,7 +27,6 @@ html {
     background: -webkit-linear-gradient(90deg, #C33764, #1D2671);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(0deg, #C33764, #1D2671);
-    height: 100%;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,9 +47,31 @@ p {
     display: none !important;
 }
 
-/*.install-app-button{*/
-/*    display: none*/
-/*}*/
+#install-app {
+    position: relative;
+    display: flex;
+
+    border: var(--sky);
+    border-radius: 4px;
+    border-style: solid;
+    padding: 4px 8px 4px 4px;
+
+    float: left;
+}
+
+#install-app:hover {
+    cursor: pointer;
+}
+
+.install-app-icon {
+    height: fit-content;
+    margin-right: 4px;
+}
+
+.install-app-text {
+    align-self: center;
+    margin: auto;
+}
 
 .main-content {
     color: var(--white);
@@ -172,21 +193,6 @@ p {
     margin-top: 8px;
 }
 
-.track-action-icon {
-    /* fallback for old browsers */
-    background: #fd746c;
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ff9068, #fd746c);
-
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-}
-
 .artist-result-icon {
     color: var(--dark);
     /* Margin used to add spacing between group icon and followers count of artist */
@@ -203,14 +209,14 @@ p {
     margin: 0px;
 }
 
-.track-action+.track-action {
+.track-action + .track-action {
     margin-top: 0px;
 }
 
 .user-feedback {
-    /* display: flex; */
     flex-direction: column;
     justify-content: center;
+    background-color: var(--dark);
 }
 
 #user-feedback-title,
@@ -227,12 +233,6 @@ p {
 .success-color {
     background-color: var(--green) !important;
 }
-
-.color-white {
-    color: var(--white) !important;
-}
-
-/* taken from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_snackbar */
 
 .show-user-feedback {
     animation: fade-in 1s forwards, fade-out 1s 3s forwards;
@@ -254,7 +254,7 @@ p {
     }
 
     to {
-        height: fit-content;
+        height: 64px;
         padding: 12px 12px;
         margin-top: 8px;
     }
@@ -262,7 +262,7 @@ p {
 
 @keyframes fade-out {
     from {
-        height: fit-content;
+        height: 64px;
         padding: 12px 12px;
         margin-top: 8px;
     }
@@ -304,7 +304,9 @@ p {
 
 .artist-picture-placeholder {
     color: var(--black);
-    font-size: 64px !important;
+    min-width: 64px;
+    min-height: 64px;
+    margin: 0 4px 0 -8px;
 }
 
 .search {

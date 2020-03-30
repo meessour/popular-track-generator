@@ -23,7 +23,11 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
+    "jquery": "^3.4.1",
     "request": "^2.88.2",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "express-minify-html": "^0.12.0"
   }
 }

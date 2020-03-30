@@ -1,25 +1,32 @@
 <%- include ("./partials/head.ejs") %>
 
 <div class="main-content centered">
-    <h1>Search the most popular tracks of your favorite artist</h1>
+    <h1><label for="artist-name-input">Search the most popular tracks of your favorite artist</label></h1>
     <div class="search centered">
-        <a id="install-app" >Install app</a>
+        <a id="install-app" class="hidden">
+            <img alt="Plus icon, click to install the app" class="install-app-icon"
+                 src="/icons/add_circle_outline-24px.svg">
+            <h5 class="install-app-text">Install app</h5>
+        </a>
         <input id="artist-name-input" class="artist-search-input" type="text" list="word-list"
                placeholder="Search for artist...">
         <!-- <button id="show-feedback">Show feedback</button>
         <button id="hide-feedback">Hide feedback</button> -->
-        <!--        <div id="user-feedback-container">-->
-        <!--            <div class="user-feedback">-->
-        <!--                <img id="loading-animation" class="user-feedback-icon" src="public/css/loading-animation.svg"-->
-        <!--                     width="40" alt="">-->
-        <!--                <i id="success-icon" class="material-icons user-feedback-icon">check_circle_outline</i>-->
-        <!--                <i id="error-icon" class="material-icons user-feedback-icon">error_outline</i>-->
-        <!--            </div>-->
-        <!--            <div class="user-feedback">-->
-        <!--                <h4 id="user-feedback-title">Parsing albums</h4>-->
-        <!--                <p id="user-feedback-text">3 / 5 albums parsed</p>-->
-        <!--            </div>-->
-        <!--        </div>-->
+        <div id="user-feedback-container">
+            <div class="user-feedback">
+                <img alt="The action performed is currently being loaded" id="loading-animation"
+                     class="user-feedback-icon" src="/css/loading-animation.svg"
+                     width="40" alt="">
+                <img alt="The action performed was successful" id="success-icon" class="user-feedback-icon"
+                     src="/icons/check_circle_outline-24px.svg">
+                <img alt="The action performed was not successful" id="error-icon" class="user-feedback-icon"
+                     src="/icons/error_outline-24px.svg">
+            </div>
+            <div class="user-feedback">
+                <h4 id="user-feedback-title">Parsing albums</h4>
+                <p id="user-feedback-text">3 / 5 albums parsed</p>
+            </div>
+        </div>
         <div id="search-result">
 
         </div>

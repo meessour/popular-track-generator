@@ -26,6 +26,7 @@ function setUserFeedback(messageTitle, messageText = "", isError = true) {
 }
 
 function startLoadingFeedback() {
+    console.log("startLoadingFeedback called!")
     resetFeedback();
 
     // Setting a timeout is needed for the classes to be actually removed
@@ -89,4 +90,4 @@ function showFeedbackError(messageTitle, messageText = "") {
     userFeedbackContainer.classList.add("show-user-feedback");
 }
 
-module.exports = { setUserFeedback, startLoadingFeedback, stopLoadingFeedback, setLoadingFeedbackTitle, setLoadingFeedbackText };
+export { setUserFeedback, startLoadingFeedback, stopLoadingFeedback, setLoadingFeedbackTitle, setLoadingFeedbackText };
