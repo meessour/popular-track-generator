@@ -1,0 +1,27 @@
+{
+  "short_name": "Popular Track Generator",
+  "name": "Popular Track Generator",
+  "description": "Search the most popular tracks of your favorite artist",
+  "icons": [
+    {
+      "src": "/icons/microphone-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/microphone-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icons/microphone-icon-1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#5e2c6b",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#1D2671"
+}
