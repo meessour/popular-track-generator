@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "[Live Demo](https://meessour.github.io/web-app-from-scratch-1920/)",
   "main": "server.js",
+  "engines": {
+    "node": "12.15.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
