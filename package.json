@@ -4,9 +4,9 @@
   "description": "[Live Demo](https://meessour.github.io/web-app-from-scratch-1920/)",
   "main": "server.js",
   "scripts": {
-    "build": "gulp",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "postinstall": "gulp"
   },
   "repository": {
     "type": "git",
