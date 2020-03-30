@@ -9,8 +9,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "prestart": "gulp",
-    "build": "gulp"
   },
   "repository": {
     "type": "git",
