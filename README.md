@@ -25,7 +25,12 @@ cd C:/../..
 npm install
 ```
 
-**Step 4:** Start the server:
+**Step 4:** build using gulp:
+```git
+gulp
+```
+
+**Step 5:** Start the server:
 ```git
 npm start
 ```
