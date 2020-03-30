@@ -1,4 +1,4 @@
-const http = require('http');
+const spdy = require('spdy');
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -46,7 +46,7 @@ if (app.get("env") === "production") {
 
 const port = process.env.PORT || 8000;
 
-http.createServer(app).listen(port, () => {
+spdy.createServer(credentials, app).listen(port, () => {
     console.log("Server is listening on port", port);
 });
 
