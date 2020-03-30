@@ -365,6 +365,32 @@ function minifyHtml(html) {
     return html.replace(/(\r\n|\n|\r)/gm, '');
 }
 ```
+I also let the server serve the jquery script, not a third party. I tell the service worker to cache this file: `/js/jquery-3.4.1.min.js`. It took 80ms to load it from the third party. When I serve it locally it is only 35ms. When it's served from cache, it's only 6ms. Now it is 7.5 times as fast.
+
+<details>
+<summary>Jquery external</summary>
+
+![Install app](./public/images/jquery-external.png)
+
+</details>
+
+<details>
+<summary>Jquery local not cached</summary>
+
+![Install app](./public/images/jquery-local.png)
+
+</details>
+
+<details>
+<summary>Jquery local cached</summary>
+
+![Install app](./public/images/jquery-local-sw.png)
+
+</details>
+
+
+
+
 
 Surprisingly, after these improvements the Performance speed did not improve. But the size of the files are less large now
 
