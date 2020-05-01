@@ -38,13 +38,10 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    console.log('Fetch event: ', event.request)
-
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             // Return and not fetch when it is cached
             if (cachedResponse) {
-                console.log("Found in cache!", cachedResponse)
                 return cachedResponse;
             }
 
