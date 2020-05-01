@@ -1,5 +1,6 @@
+require('dotenv').config();
+
 const http = require('http');
-const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const enforce = require('express-sslify');
@@ -8,28 +9,28 @@ const minifyHtml = require('express-minify-html');
 // The modules
 const get = require('./modules/get');
 const api = require('./modules/api');
-const parser = require('./modules/parser');
 const templateEngine = require('./modules/template-engine');
 
 const app = express();
 
 app.set('view engine', 'ejs')
     .set('views', 'views')
-    .use(express.static('build'))
+    // TODO: make it work on 'build' instead of 'public'
+    .use(express.static('public'))
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: true}))
-.use(minifyHtml({
-    override: true,
-    exception_url: false,
-    htmlMinifier: {
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseBooleanAttributes: true,
-        removeAttributeQuotes: true,
-        removeEmptyAttributes: true,
-        minifyJS: true
-    }
-}))
+    .use(minifyHtml({
+        override: true,
+        exception_url: false,
+        htmlMinifier: {
+            removeComments: true,
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeAttributeQuotes: true,
+            removeEmptyAttributes: true,
+            minifyJS: true
+        }
+    }))
 ;
 
 // Enforce https when on Heroku
@@ -45,6 +46,15 @@ http.createServer(app).listen(port, () => {
 
 app.get('/offline', (req, res) => {
     res.render('offline');
+});
+
+app.get('/login', (req, res) => {
+    var scopes = 'playlist-modify-private';
+    res.redirect('https://accounts.spotify.com/authorize' +
+        '?response_type=code' +
+        '&client_id=' + my_client_id +
+        (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+        '&redirect_uri=' + encodeURIComponent(req.get('host')));
 });
 
 app.get('/artistId', (req, res) => {

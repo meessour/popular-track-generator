@@ -2,7 +2,10 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 module.exports = {
     fetchToken: async function () {
-        const token = "Mjc3OWY3YmYwOTAzNDMxZWE2MTJkODFhNDM3YzY5MWI6Yjc2ZGEyODMxODM5NDU3ZGI4N2Q0NzJmNmI2MDdiYzY=";
+        const id = process.env.CLIENT_ID;
+        const secret = process.env.CLIENT_SECRET;
+
+        const token = Buffer.from(`${id}:${secret}`).toString('base64');
 
         const url = "https://accounts.spotify.com/api/token";
         const requestType = "POST";

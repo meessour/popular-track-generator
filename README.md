@@ -25,7 +25,12 @@ cd C:/../..
 npm install
 ```
 
-**Step 4:** Start the server:
+**Step 4:** build using gulp:
+```git
+gulp
+```
+
+**Step 5:** Start the server:
 ```git
 npm start
 ```
@@ -69,7 +74,7 @@ if (!navigator.onLine) {
 When the user goes from offline to online while in the app the app shows the following message:
 ![Install app](./public/images/online_message.png)
 
-###Perceived load speed
+### Perceived load speed
 Before the app needed to load fonts and icons from google:
 
 <details>
@@ -260,7 +265,7 @@ rel="noopener"></a>
 
 Now the score is 93.
 
-The other best practice is to use the HTTP/2 protocol. HTTP/2 offers many benefits over HTTP/1.1, including binary headers, multiplexing, and server push. Currently there is no way to do this using express in a nodejs server (source: https://stackoverflow.com/questions/28639995/node-js-server-and-http-2-2-0-with-express-js). So I will be ignoring this optimisation.
+The other best practice is to use the HTTP/2 protocol. HTTP/2 offers many benefits over HTTP/1.1, including binary headers, multiplexing, and server push. Currently there is no way to do this using express in a nodejs server (source: https://stackoverflow.com/questions/28639995/node-js-server-and-http-2-2-0-with-express-js#comment51527236_28804922). So I will be ignoring this optimisation.
 
 ###SEO
 

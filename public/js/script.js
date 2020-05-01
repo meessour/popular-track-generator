@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('/service-worker.js')
             .then(function (registration) {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                console.log('ServiceWorker registration successful with scope: !', registration.scope);
                 return registration.update();
             });
     });
@@ -78,6 +78,24 @@ $(() => {
                 console.log('User dismissed the install prompt');
                 showInstallPromotion();
             }
+        });
+    });
+
+    $("#authorize").on("click", function () {
+
+        console.log("User clikced authorize");
+
+        $.get(window.location.origin + "/login", (data) => {
+            console.log("success login!");
+            // $("#most-popular-tracks").html(data);
+            // userFeedback.stopLoadingFeedback(`Showing most popular tracks for artist`, "", false);
+        }).fail(function (error) {
+            console.log("Cannot authorize user", error);
+            userFeedback.setUserFeedback(`Cannot authorize`, error.statusText, true);
+
+        }).catch(function (error) {
+            console.log("Cannot authorize user", error);
+            userFeedback.setUserFeedback(`Cannot authorize`, error.statusText, true);
         });
     });
 
