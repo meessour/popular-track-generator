@@ -39,6 +39,8 @@ if (app.get("env") === "production") {
 }
 
 const port = process.env.PORT || 8000;
+const CLIENT_ID = process.env.CLIENT_ID;
+const redirectUrl = 'https://popular-track-generator.herokuapp.com';
 
 http.createServer(app).listen(port, () => {
     console.log("Server is listening on port", port);
@@ -49,12 +51,15 @@ app.get('/offline', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    var scopes = 'playlist-modify-private';
+    // get.getLoginOAuth().then(data => {
+    //     console.log("getLoginOAuth data", data);
+    // })
+    const scopes = 'playlist-modify-private';
     res.redirect('https://accounts.spotify.com/authorize' +
         '?response_type=code' +
-        '&client_id=' + my_client_id +
+        '&client_id=' + CLIENT_ID +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent(req.get('host')));
+        '&redirect_uri=' + encodeURIComponent(redirectUrl));
 });
 
 app.get('/artistId', (req, res) => {
