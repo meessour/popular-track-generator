@@ -109,12 +109,19 @@ $(() => {
 
             // Check if input is not empty
             if (isString(inputText)) {
-                $.get(window.location.origin, {inputText: inputText}, (data) => {
+                // Get the current URL
+                let url = new URL(window.location.href);
+                url.searchParams.set('q', inputText);
+
+                window.history.pushState({}, inputText, url);
+
+                $.get(window.location.href, (data) => {
+                    console.log("Get request response")
+
                     $("#search-result").removeClass("hidden");
                     $("#search-result").html(data);
                 }).fail(function (error) {
-                    console.log("Error fail", error)
-                    ;
+                    console.log("Error fail", error);
                 }).catch(function (error) {
                     console.log("Error", error);
                 });

@@ -55,7 +55,7 @@ p {
 
     background-color: transparent;
     border: var(--sky);
-    border-radius: 14px;
+    border-radius: 8px;
     border-style: solid;
     padding: 4px 8px 4px 4px;
 
@@ -71,7 +71,7 @@ p {
     float: right;
 }
 
-#install-app:hover, #authorize:hover {
+#install-app:hover, #authorize:hover, #artist-name-input-submit:hover {
     cursor: pointer;
 }
 
@@ -103,22 +103,48 @@ p {
 
 .user-feedback-icon {
     font-size: 40px !important;
+
     color: var(--white);
+
     float: left;
-    height: 40px;
-    width: 40px;
+
+    min-height: 40px;
+    min-width: 40px;
+
     margin-right: 8px;
 }
 
-.artist-search-input {
-    padding: 12px 20px;
-    margin-top: 8px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    background-color: var(--sky);
-    border-radius: 8px;
-    box-sizing: border-box;
+#artist-name-input {
     width: 100%;
+
+    padding: 12px 20px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    box-sizing: border-box;
+
+    background-color: var(--sky);
+}
+
+#artist-name-input-submit {
+    width: 10%;
+    padding: 0;
+
+    background-color: var(--sky);
+
+    border: 1px solid #ccc;
+    border-radius: 0 8px 8px 0;
+    box-sizing: border-box;
+}
+
+.search-icon {
+    min-height: 24px;
+    min-width: 24px;
+
+    height: 24px;
+    width: 24px;
+
+    vertical-align: middle;
 }
 
 ::-webkit-input-placeholder {
@@ -192,7 +218,7 @@ p {
 
 #search-result {
     background-color: var(--sky);
-    margin-top: 8px;
+    margin-top: 2px;
 }
 
 #most-popular-tracks {
@@ -201,9 +227,31 @@ p {
     /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(315deg, hsl(210, 29%, 25%), hsl(204, 8%, 40%));
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(135deg, hsl(210, 29%, 25%), hsl(204, 8%, 40%));
+    background: linear-gradient(105deg, hsl(210, 29%, 25%), hsl(204, 8%, 40%));
 
     margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.app-actions-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+    height: fit-content;
+
+    margin: 8px 0;
+}
+
+.artist-search-input-container {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: fit-content;
+
+    margin: 8px 0 4px 0;
 }
 
 .artist-result-icon {
@@ -247,7 +295,7 @@ p {
 }
 
 .show-user-feedback {
-    animation: fade-in 1s forwards, fade-out 1s 3s forwards;
+    animation: fade-in 0.5s forwards, fade-out 0.5s 3s forwards;
 }
 
 .start-loading {
@@ -268,7 +316,7 @@ p {
     to {
         height: 64px;
         padding: 12px 12px;
-        margin-top: 8px;
+        margin: 8px 0;
     }
 }
 
@@ -276,27 +324,35 @@ p {
     from {
         height: 64px;
         padding: 12px 12px;
-        margin-top: 8px;
+        margin: 8px 0;
     }
 
     to {
-        height: 0px;
-        padding: 0px 12px;
-        margin: 0px;
+        height: 0;
+        padding: 0 12px;
+        margin: 0;
     }
 }
 
 @keyframes show-then-fade-out {
     0% {
-        height: fit-content;
+        opacity: 0;
+        height: 64px;
         padding: 12px 12px;
-        margin-top: 8px;
+        margin: 8px 0;
+    }
+
+    10% {
+        opacity: 1;
+        height: 64px;
+        padding: 12px 12px;
+        margin: 8px 0;
     }
 
     90% {
-        height: fit-content;
+        height: 64px;
         padding: 12px 12px;
-        margin-top: 8px;
+        margin: 8px 0;
     }
 
     100% {

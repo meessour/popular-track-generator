@@ -3,20 +3,30 @@
 <div class="main-content centered">
     <h1><label for="artist-name-input">Search the most popular tracks of your favorite artist</label></h1>
     <div class="search centered">
-        <a id="install-app" class="hidden">
-            <img alt="Plus icon, click to install the app" class="button-icon"
-                 src="/icons/add_circle_outline-24px.svg">
-            <h5 class="install-app-text">Install app</h5>
-        </a>
-        <a id="authorize" class="hidden">
-            <img alt="Authorize user button" class="button-icon"
-                 src="/icons/spotify_icon.png">
-            <h5 class="install-app-text">Connect With Spotify</h5>
-        </a>
-        <input id="artist-name-input" class="artist-search-input" type="text" list="word-list"
-               placeholder="Search for artist...">
-        <!-- <button id="show-feedback">Show feedback</button>
-        <button id="hide-feedback">Hide feedback</button> -->
+
+        <div class="app-actions-container">
+            <a id="install-app" class="hidden">
+                <img alt="Plus icon, click to install the app" class="button-icon"
+                     src="/icons/add_circle_outline-24px.svg">
+                <h5 class="install-app-text">Install app</h5>
+            </a>
+            <a id="authorize">
+                <img alt="Authorize user button" class="button-icon"
+                     src="/icons/spotify_icon.png">
+                <h5 class="install-app-text">Connect With Spotify</h5>
+            </a>
+        </div>
+
+        <form class="artist-search-input-container" action="/" method="POST">
+            <input id="artist-name-input" type="text" list="word-list"
+                   placeholder="Search for artist...">
+
+            <button id="artist-name-input-submit" type="submit">
+                <img alt="Search" class="search-icon"
+                     src="/icons/search-24px.svg">
+            </button>
+        </form>
+
         <div id="user-feedback-container">
             <div class="user-feedback">
                 <img alt="The action performed is currently being loaded" id="loading-animation"
@@ -33,11 +43,11 @@
             </div>
         </div>
         <div id="search-result">
-
+            <%- searchResult %>
         </div>
 
         <div id="most-popular-tracks">
-
+            <%- tracksResult %>
         </div>
     </div>
 </div>

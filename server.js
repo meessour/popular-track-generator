@@ -81,38 +81,66 @@ app.get('/artistId', (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    const inputText = req.query.inputText;
-    const artistId = req.query.artistId;
+app.post('/', (req, res) => {
+    const url = req.headers.referer;
+    const tracksResult = ''
+
+    console.log("Post call url", url);
+
+    const match = url.match('[?&]q=([^&]+)');
+    const inputText = match ? match[1] : null;
+
+    console.log("Post call inputText", inputText);
 
     if (isString(inputText)) {
-
-        api.fetchToken()
-            .then(token => {
-                if (token && token.access_token)
-                    return token.access_token;
-
-                throw "geen token";
-            })
-            .then(token => {
-                let artists = api.fetchArtists(inputText, token);
-                return artists;
-            })
-            .then(artists => {
-                // return parser.parseArtistsData(artists);
-                return templateEngine.getArtistSearchResultsTemplate(artists);
-            }).then(artists => {
-            res.send(artists);
+        // TODO: let ejs make template, not custom template
+        getArtistResultHtml(req, res, inputText).then(resultHtml => {
+            res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
         })
-            .catch(error => {
-                res.status(500);
-                res.send('error');
-            });
-
     } else {
-        res.render('index.ejs', {artists: [], tracks: []});
+        res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
+    }
+})
+
+app.get('/', (req, res) => {
+    const inputText = req.query.q || req.params.q;
+    const tracksResult = ''
+
+    console.log("Get call inputText", inputText);
+
+    if (isString(inputText)) {
+        getArtistResultHtml(req, res, inputText).then(resultHtml => {
+            console.log("With HTML")
+            // res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
+            res.send(resultHtml);
+        })
+    } else {
+        console.log("get response EMPTY html")
+        res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
     }
 });
+
+function getArtistResultHtml(req, res, inputText) {
+    return api.fetchToken()
+        .then(token => {
+            if (token && token.access_token)
+                return token.access_token;
+
+            throw "No spotify access_token available";
+        })
+        .then(token => {
+            return api.fetchArtists(inputText, token);
+        })
+        .then(artists => {
+            return templateEngine.getArtistSearchResultsTemplate(artists);
+        }).then(resultHtml => {
+            return resultHtml;
+        })
+        .catch(error => {
+            res.status(500);
+            res.send(error);
+        });
+}
 
 // check if value is a valid string with content
 function isString(value) {
