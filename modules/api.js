@@ -1,4 +1,5 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const fetch = require("node-fetch");
 
 module.exports = {
     fetchToken: async function () {
@@ -42,6 +43,32 @@ module.exports = {
             xhr.send("grant_type=client_credentials");
         });
 
+    },
+
+    fetchLoginOAuth: async function() {
+        const id = process.env.CLIENT_ID;
+        const secret = process.env.CLIENT_SECRET;
+
+        const url = 'https://accounts.spotify.com/api/token';
+
+        try {
+            const encryptedToken = Buffer.from(`${id}:${secret}`).toString('base64');
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Basic ${encryptedToken}`
+                },
+                body: 'grant_type=client_credentials'
+            });
+
+            console.log("New token fetched");
+
+            return response.json();
+        } catch (error) {
+            console.log("Something went wrong", error);
+        }
     },
 
     fetchArtists: async function (input, token) {

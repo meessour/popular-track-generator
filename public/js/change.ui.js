@@ -1,4 +1,4 @@
-const artistsNameInput = document.getElementById("artist-name-input");
+const artistsNameInput = document.getElementById("artist-search-input");
 const searchResult = document.getElementById("search-result");
 const mostPopularTracks = document.getElementById("most-popular-tracks");
 

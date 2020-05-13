@@ -6,7 +6,7 @@ const changeUi = require("./server-modules/change-ui.mjs");
 // Routie, a routing library
 import './libraries/routie.min.js';
 
-const artistsNameInput = document.getElementById("artist-name-input");
+const artistsNameInput = document.getElementById("artist-search-input");
 
 artistsNameInput.addEventListener("input", function () {
     const input = artistsNameInput.value;

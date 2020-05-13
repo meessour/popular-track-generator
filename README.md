@@ -214,13 +214,13 @@ Now the score is 80.
 The last optimisation opportunity also has to do with assistive technology (like a screenreader). For my app I have a searchbar with a placeholder in it:
 
 ```html
-<input id="artist-name-input" class="artist-search-input" type="text" list="word-list" placeholder="Search for artist...">
+<input id="artist-search-input" class="artist-search-input" type="text" list="word-list" placeholder="Search for artist...">
 ```
 A screenreader doesn't use this property but uses a associated label. My idea was to add a label and then add the following style: ```style="visibility: hidden"```. This way the label was still in the page but not visible onscreen:
 
 ```html
 <label for="artist-name-input" style="visibility: hidden">Search for an artist:</label>
-<input id="artist-name-input" class="artist-search-input" type="text" list="word-list" placeholder="Search for artist...">
+<input id="artist-search-input" class="artist-search-input" type="text" list="word-list" placeholder="Search for artist...">
 ```
 
 The test did not succeed... My other plan was to use the website title as label. Before:

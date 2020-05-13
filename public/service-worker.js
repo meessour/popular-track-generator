@@ -14,12 +14,12 @@ const icons = [
 ];
 
 const urlsToCache = [
-    '/',
-    '/manifest.webmanifest',
-    '/css/styles.css',
-    '/js/script.js',
-    '/js/jquery-3.4.1.min.js',
-    '/js/user_feedback.js'
+    // '/',
+    // '/manifest.webmanifest',
+    // '/css/styles.css',
+    // '/js/script.js',
+    // '/js/jquery-3.4.1.min.js',
+    // '/js/user_feedback.js'
 ].concat(icons);
 
 self.addEventListener('install', (event) => {
