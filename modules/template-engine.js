@@ -36,7 +36,7 @@ function getMostPopularTracksTemplate(tracks) {
     /* Used to set an equal width for all the numbers width a set amount of characters */
     let characterWidthClass
 
-    const maxItemsToShow = 100 || tracks.length
+    const maxItemsToShow = tracks.length < 100 ? tracks.length : 100;
 
     let html = "";
 
