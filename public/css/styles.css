@@ -16,6 +16,7 @@
 * {
     box-sizing: border-box;
     font-family: Montserrat, Arial, sans-serif;
+    letter-spacing: 0.5px;
 }
 
 body,
@@ -51,7 +52,7 @@ p {
 #install-app, #authorize {
     position: relative;
     display: flex;
-    color: white;
+    color: var(--sky);
 
     background-color: transparent;
     border: var(--sky);
@@ -81,7 +82,13 @@ p {
     margin-right: 6px;
 }
 
-.install-app-text {
+#install-app-text {
+    align-self: center;
+    margin: auto;
+    color: var(--white);
+}
+
+#connect-spotify-button-text{
     align-self: center;
     margin: auto;
 }
@@ -114,7 +121,7 @@ p {
     margin-right: 8px;
 }
 
-#artist-name-input {
+#artist-search-input {
     width: 100%;
 
     padding: 12px 20px;
@@ -219,21 +226,22 @@ p {
 #search-result {
     background-color: var(--sky);
     margin-top: 2px;
+    margin-bottom: 4px;
 }
 
 #most-popular-tracks {
     /* fallback for old browsers */
     background: hsl(210, 29%, 25%);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(315deg, hsl(210, 29%, 25%), hsl(204, 8%, 40%));
+    background: -webkit-linear-gradient(315deg, #29323c, #485563);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(105deg, hsl(210, 29%, 25%), hsl(204, 8%, 40%));
+    background: linear-gradient(105deg, #29323c, #485563);
 
-    margin-top: 8px;
+    margin-top: 4px;
     margin-bottom: 16px;
 }
 
-.app-actions-container{
+#app-actions-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -377,7 +385,7 @@ p {
     margin: 0 4px 0 -8px;
 }
 
-.search {
+#search-wrapper {
     width: 95%;
 }
 

@@ -2,28 +2,25 @@
 
 <div class="main-content centered">
     <h1><label for="artist-name-input">Search the most popular tracks of your favorite artist</label></h1>
-    <div class="search centered">
+    <div id="search-wrapper" class="centered">
 
-        <div class="app-actions-container">
+        <div id="app-actions-container">
+            <a id="authorize" class="hidden">
+                <img alt="Authorize user button" class="button-icon"
+                     src="/icons/spotify_icon.png">
+                <h5 id="connect-spotify-button-text">Connect With Spotify</h5>
+            </a>
             <a id="install-app" class="hidden">
                 <img alt="Plus icon, click to install the app" class="button-icon"
                      src="/icons/add_circle_outline-24px.svg">
-                <h5 class="install-app-text">Install app</h5>
-            </a>
-            <a id="authorize">
-                <img alt="Authorize user button" class="button-icon"
-                     src="/icons/spotify_icon.png">
-                <h5 class="install-app-text">Connect With Spotify</h5>
+                <h5 id="install-app-text">Install app</h5>
             </a>
         </div>
 
-        <form class="artist-search-input-container" action="/" method="POST">
-            <input id="artist-name-input" type="text" list="word-list"
-                   placeholder="Search for artist...">
-
+        <form class="artist-search-input-container" action="/" method="GET">
+            <input id="artist-search-input" name="q" type="text" placeholder="Search for artist...">
             <button id="artist-name-input-submit" type="submit">
-                <img alt="Search" class="search-icon"
-                     src="/icons/search-24px.svg">
+                <img alt="Search" class="search-icon" src="/icons/search-24px.svg">
             </button>
         </form>
 
@@ -38,8 +35,8 @@
                      src="/icons/error_outline-24px.svg">
             </div>
             <div class="user-feedback">
-                <h4 id="user-feedback-title">Parsing albums</h4>
-                <p id="user-feedback-text">3 / 5 albums parsed</p>
+                <h4 id="user-feedback-title"></h4>
+                <p id="user-feedback-text"></p>
             </div>
         </div>
         <div id="search-result">

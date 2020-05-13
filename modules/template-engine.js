@@ -36,11 +36,14 @@ function getMostPopularTracksTemplate(tracks) {
     /* Used to set an equal width for all the numbers width a set amount of characters */
     let characterWidthClass
 
+    const maxItemsToShow = 100 || tracks.length
+
     let html = "";
 
-    for (let i = 0; i < tracks.length; i++) {
+    for (let i = 0; i < maxItemsToShow; i++) {
         const track = tracks[i];
 
+        // Determines with used for the number indicator
         if (i >= 999) {
             characterWidthClass = "character-width-4";
         } else if (i >= 99) {

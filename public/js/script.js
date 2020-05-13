@@ -5,6 +5,9 @@ let deferredPrompt;
 // Track if the user is/was offline
 let isOffline = false
 
+// Only show connect Spotify button when JS is available
+showConnectSpotifyButton();
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('/service-worker.js')
@@ -99,23 +102,23 @@ $(() => {
         });
     });
 
-    $("#artist-name-input").on("input", function () {
+    $("#artist-search-input").on("input", function () {
         if (!navigator.onLine) {
             showOfflineMessage();
         } else {
-            const inputTextTarget = $("#artist-name-input");
+            const inputTextTarget = $("#artist-search-input");
 
             const inputText = inputTextTarget ? inputTextTarget.val() : undefined;
 
             // Check if input is not empty
             if (isString(inputText)) {
                 // Get the current URL
-                let url = new URL(window.location.href);
-                url.searchParams.set('q', inputText);
+                // let url = new URL(window.location.href);
+                // url.searchParams.set('q', inputText);
+                //
+                // window.history.pushState({}, inputText, url);
 
-                window.history.pushState({}, inputText, url);
-
-                $.get(window.location.href, (data) => {
+                $.post(window.location.href, {inputText: inputText}, (data) => {
                     console.log("Get request response")
 
                     $("#search-result").removeClass("hidden");
@@ -167,6 +170,10 @@ function showInstallPromotion() {
     $("#install-app").removeClass("hidden");
 }
 
+function showConnectSpotifyButton() {
+    $("#authorize").removeClass("hidden");
+}
+
 function hideInstallPromotion() {
     $("#install-app").addClass("hidden");
 }
@@ -178,7 +185,7 @@ function clearEverything() {
 }
 
 function clearSearchBar() {
-    $("#artist-name-input").val("");
+    $("#artist-search-input").val("");
 }
 
 function clearSearchResults() {

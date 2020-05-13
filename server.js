@@ -82,40 +82,40 @@ app.get('/artistId', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const url = req.headers.referer;
-    const tracksResult = ''
+    const inputText = req.body.inputText;
 
-    console.log("Post call url", url);
-
-    const match = url.match('[?&]q=([^&]+)');
-    const inputText = match ? match[1] : null;
-
-    console.log("Post call inputText", inputText);
+    console.log("Post:", inputText)
 
     if (isString(inputText)) {
-        // TODO: let ejs make template, not custom template
+        // TODO: let ejs make template, not custom template. don't use a funciton for this
         getArtistResultHtml(req, res, inputText).then(resultHtml => {
-            res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
+            res.send(resultHtml);
         })
     } else {
-        res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
+        res.send('');
     }
 })
 
 app.get('/', (req, res) => {
-    const inputText = req.query.q || req.params.q;
+    // const url = req.headers.referer;
     const tracksResult = ''
+    const inputText = req.query.q
 
-    console.log("Get call inputText", inputText);
+    console.log("Get", inputText);
+
+    // if (url) {
+    //     const match = url.match('[?&]q=([^&]+)');
+    //     inputText = match ? match[1] : null;
+    // }
 
     if (isString(inputText)) {
         getArtistResultHtml(req, res, inputText).then(resultHtml => {
-            console.log("With HTML")
-            // res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
-            res.send(resultHtml);
-        })
+            res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
+        }).catch(error => {
+            res.status(500);
+            res.send(error);
+        });
     } else {
-        console.log("get response EMPTY html")
         res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
     }
 });
@@ -142,7 +142,7 @@ function getArtistResultHtml(req, res, inputText) {
         });
 }
 
-// check if value is a valid string with content
+// Check if value is a valid string with content
 function isString(value) {
     return value && value !== "" && value.length > 0 && value.trim().length > 0;
 }
