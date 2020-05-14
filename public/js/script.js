@@ -140,7 +140,7 @@ function lookupArtist(artistId) {
         if (!navigator.onLine) {
             showOfflineMessage();
         } else {
-            userFeedback.startLoadingFeedback();
+            userFeedback.startLoadingFeedback("Fetching tracks...", "This can take up to 30 seconds");
             clearEverything();
             $.get(window.location.origin + "/artistId", {artistId: artistId}, (data) => {
                 $("#most-popular-tracks").html(data);

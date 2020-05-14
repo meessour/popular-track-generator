@@ -25,12 +25,15 @@ function setUserFeedback(messageTitle, messageText = "", isError = true) {
     }, 1);
 }
 
-function startLoadingFeedback() {
+function startLoadingFeedback(messageTitle, messageText) {
     console.log("startLoadingFeedback called!")
     resetFeedback();
 
     // Setting a timeout is needed for the classes to be actually removed
     setTimeout(function () {
+        userFeedbackTitle.innerHTML = messageTitle;
+        userFeedbackText.innerHTML = messageText;
+
         userFeedbackLoadingAnimation.classList.remove("hidden");
         userFeedbackContainer.classList.add("start-loading");
     }, 1);

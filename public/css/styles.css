@@ -91,11 +91,15 @@ p {
     align-self: center;
     margin: auto;
     color: var(--white);
+
+    text-align: start;
 }
 
 #connect-spotify-button-text {
     align-self: center;
     margin: auto;
+
+    text-align: start;
 }
 
 .main-content {
@@ -284,7 +288,7 @@ p {
     /* background-color: var(--blue); */
     /* background: hsl(256, 61%, 45%); */
     background: rgb(32, 58, 67);
-    height: 0;
+    height: fit-content;
     display: flex;
     padding: 0 12px;
     margin: 0;
@@ -296,7 +300,8 @@ p {
 
 .user-feedback {
     flex-direction: column;
-    justify-content: center;
+
+    align-self: center;
 }
 
 #user-feedback-title,
@@ -334,7 +339,7 @@ p {
     }
 
     to {
-        height: 64px;
+        height: fit-content;
         padding: 12px 12px;
         margin: 8px 0;
     }
@@ -342,7 +347,7 @@ p {
 
 @keyframes fade-out {
     from {
-        height: 64px;
+        height: fit-content;
         padding: 12px 12px;
         margin: 8px 0;
     }
@@ -357,20 +362,20 @@ p {
 @keyframes show-then-fade-out {
     0% {
         opacity: 0;
-        height: 64px;
+        height: fit-content;
         padding: 12px 12px;
         margin: 8px 0;
     }
 
     10% {
         opacity: 1;
-        height: 64px;
+        height: fit-content;
         padding: 12px 12px;
         margin: 8px 0;
     }
 
     90% {
-        height: 64px;
+        height: fit-content;
         padding: 12px 12px;
         margin: 8px 0;
     }
