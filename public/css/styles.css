@@ -285,10 +285,9 @@ p {
 }
 
 #user-feedback-container {
-    /* background-color: var(--blue); */
-    /* background: hsl(256, 61%, 45%); */
     background: rgb(32, 58, 67);
-    height: fit-content;
+    /* Leave this at 0 so the inital state is hidden */
+    height: 0;
     display: flex;
     padding: 0 12px;
     margin: 0;
