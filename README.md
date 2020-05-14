@@ -13,12 +13,13 @@ The code of the project used was from the 13th of march. The code from the origi
 2. [Progressive Web App](#progressive-web-app)    
     - [Job stories](#job-stories)   
     - [Offline](#offline)   
+3. [Audits](#audits)    
     - [Perceived load speed](#perceived-load-speed)   
     - [Accessibility](#accessibility)   
-3. [Best Practices](#best-practices)    
-     - [SEO](#seo)
-     - [Good Practices](#good-practices)
-     - [Critical Rendering Path](#critical-rendering-path)
+    - [Best Practices](#best-practices)    
+    - [SEO](#seo)
+    - [Good Practices](#good-practices)
+    - [Critical Rendering Path](#critical-rendering-path)
 4. [Licence](#licence)    
 
 ## How to install
@@ -50,7 +51,7 @@ npm start
 
 **Step 5:** Navigate to: http://localhost:8080/
 
-## Progressive Web App
+### Progressive Web App
 Once the install prompt of the app is stashed, it wil show a button with the text "Install app".
 It will fire the prompt once the user clicks this button
 ```javascript
@@ -84,6 +85,10 @@ if (!navigator.onLine) {
 ```
 When the user goes from offline to online while in the app the app shows the following message:
 ![Install app](./public/images/online_message.png)
+
+## Audits
+
+Here are reslts and improvements made on the basics of Google Chrome's audit tool: [Lighthouse](https://developers.google.com/web/tools/lighthouse).
 
 ### Perceived load speed
 Before the app needed to load fonts and icons from google:
