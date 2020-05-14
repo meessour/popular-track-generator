@@ -1,14 +1,27 @@
-# Spotify Artists Best-Of Showcase
+# Popular Track Generator
 
 The code of the project used was from the 13th of march. The code from the original repo may differ. 
 [Click here to view the forked repo](https://github.com/meessour/web-app-from-scratch-1920)
 
-## Demo's
+## Demo
 
-[Live Demo](https://popular-track-generator.herokuapp.com/)
+[Demo](https://popular-track-generator.herokuapp.com/)
 
-<details>
-<summary>How to install</summary>
+## Table of Contents
+
+1. [How to install](#How-to-install)
+2. [Progressive Web App](#progressive-web-app)    
+    - [Job stories](#job-stories)   
+    - [Offline](#offline)   
+    - [Perceived load speed](#perceived-load-speed)   
+    - [Accessibility](#accessibility)   
+3. [Best Practices](#best-practices)    
+     - [SEO](#seo)
+     - [Good Practices](#good-practices)
+     - [Critical Rendering Path](#critical-rendering-path)
+4. [Licence](#licence)    
+
+## How to install
 
 **Step 1:** Clone project:
 ```git
@@ -36,7 +49,6 @@ npm start
 ```
 
 **Step 5:** Navigate to: http://localhost:8080/
-</details>
 
 ## Progressive Web App
 Once the install prompt of the app is stashed, it wil show a button with the text "Install app".
@@ -50,7 +62,6 @@ window.addEventListener("beforeinstallprompt", function (e) {
     // Update UI notify the user they can install the PWA
     showInstallPromotion();
 });
-
 ```
 ![Install app](./public/images/install_app.png)
 Once the app is installed or when the app was already installed, it will hide the button.
@@ -68,7 +79,7 @@ This will also show when i'm trying to use an online feature but the user is off
 if (!navigator.onLine) {
     showOfflineMessage();
 } else {
-    ...
+    // ...
 }
 ```
 When the user goes from offline to online while in the app the app shows the following message:
@@ -114,7 +125,6 @@ I also included ```defer``` tags to all scripts. This means the script will load
     <script defer type="module" src="/js/user_feedback.js"></script>
 ```
 
-
 <details>
 <summary>What the performance rating was after</summary>
 
@@ -148,7 +158,7 @@ In order to reduce the size of the content that's being served, I use minifyHTML
 }))
 ```
 
-###Accessibility
+### Accessibility
 
 The Accessibility results before were 47.
 
@@ -193,8 +203,6 @@ The seccond optimisation is used for a experience enchanmend. Some people use as
 
 In order for a screenreader to read such an image, I will use ```alt``` to provide context for the screenreader.
 
-**Good practices:**
-
 Here are some good practices to use when providing an ```alt``` text (Source: https://web.dev/image-alt/?utm_source=lighthouse&utm_medium=devtools):
 
 * alt text should give the intent, purpose, and meaning of the image.
@@ -235,7 +243,7 @@ I wrapped the text in a ```label``` and gave it ```for="artist-name-input"``` so
 
 Now the score is 100.
 
-### Best Practices
+## Best Practices
 I scored 86 on this.
 
 <details>
@@ -267,7 +275,7 @@ Now the score is 93.
 
 The other best practice is to use the HTTP/2 protocol. HTTP/2 offers many benefits over HTTP/1.1, including binary headers, multiplexing, and server push. Currently there is no way to do this using express in a nodejs server (source: https://stackoverflow.com/questions/28639995/node-js-server-and-http-2-2-0-with-express-js#comment51527236_28804922). So I will be ignoring this optimisation.
 
-###SEO
+### SEO
 
 My SEO score is 89
 
@@ -280,7 +288,7 @@ My SEO score is 89
 
 I don't have a meta description right now. This is used to sum up the content of the page. This way my page will look more relevant and can increase search traffic (source: https://web.dev/meta-description/?utm_source=lighthouse&utm_medium=devtools)
 
-####Best Practices
+### Good Practices
 
 Here are some good practices used for a meta description
 
@@ -301,7 +309,7 @@ I added this line to my `html`:
   content="Search for an artist on Spotify and generate a list with the most popular songs of that artist.">
 ```
 
-##Optimize the performance (Critical Rendering Path)
+### Critical Rendering Path
 
 The first thing I did in order to improve the critical render path was to add defer tags to the scripts.
 ```html
@@ -392,10 +400,6 @@ I also let the server serve the jquery script, not a third party. I tell the ser
 ![Install app](./public/images/jquery-local-sw.png)
 
 </details>
-
-
-
-
 
 Surprisingly, after these improvements the Performance speed did not improve. But the size of the files are less large now
 
