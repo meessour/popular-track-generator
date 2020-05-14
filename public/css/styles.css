@@ -70,6 +70,8 @@ p {
     background-color: var(--spotify_green);
 
     float: right;
+
+    margin-right: 8px;
 }
 
 #install-app:hover, #authorize:hover, #artist-name-input-submit:hover {
@@ -79,7 +81,10 @@ p {
 .button-icon {
     height: 24px;
     width: 24px;
+
     margin-right: 6px;
+
+    align-self: center;
 }
 
 #install-app-text {
@@ -88,7 +93,7 @@ p {
     color: var(--white);
 }
 
-#connect-spotify-button-text{
+#connect-spotify-button-text {
     align-self: center;
     margin: auto;
 }
@@ -98,7 +103,12 @@ p {
     font-weight: bold;
     width: 90%;
     max-width: 500px;
-    padding: 20px;
+}
+
+.main-content > h1 {
+    width: 95%;
+
+    margin: 32px auto 16px auto;
 }
 
 .centered {
@@ -134,7 +144,7 @@ p {
 }
 
 #artist-name-input-submit {
-    width: 10%;
+    min-width: 42px;
     padding: 0;
 
     background-color: var(--sky);
@@ -241,7 +251,7 @@ p {
     margin-bottom: 16px;
 }
 
-#app-actions-container{
+#app-actions-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -250,6 +260,8 @@ p {
     height: fit-content;
 
     margin: 8px 0;
+
+    overflow: hidden;
 }
 
 .artist-search-input-container {
