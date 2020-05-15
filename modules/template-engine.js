@@ -6,7 +6,7 @@ function getArtistSearchResultsTemplate(artists) {
     for (let i = 0; i < artists.length; i++) {
         const artist = artists[i]
         html +=
-            `<a class="artist-item" href=#${artist.id}>`;
+            `<a class="artist-item" href=/${artist.id}>`;
 
         // Determine if a artist has a image. If not show a placeholder
         if (artist.images[0] && artist.images[0].url.length > 1) {

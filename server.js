@@ -62,12 +62,15 @@ app.get('/login', (req, res) => {
         '&redirect_uri=' + encodeURIComponent(redirectUrl));
 });
 
-app.get('/artistId', (req, res) => {
-    const artistId = req.query.artistId;
+app.get('/:artistId', (req, res) => {
+    const artistId = req.params.artistId;
+
+    console.log("get: /:artistId", artistId)
 
     if (isString(artistId)) {
-        get.getMostPopularTracks(artistId).then(data => {
-            res.send(data);
+        get.getMostPopularTracks(artistId).then(tracksResult => {
+            // res.send(data);
+            res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
         }).catch(error => {
             console.log("iets ging mis:", error);
 
@@ -81,15 +84,21 @@ app.get('/artistId', (req, res) => {
     }
 });
 
-app.post('/', (req, res) => {
+app.post(['/', '/artistId'], (req, res) => {
     const inputText = req.body.inputText;
+    const artistId = req.body.artistId;
 
-    console.log("Post:", inputText)
+    console.log("Post: ['/', '/artistId']. inputText:", inputText)
+    console.log("Post: ['/', '/artistId']. artistId:", artistId)
 
     if (isString(inputText)) {
         // TODO: let ejs make template, not custom template. don't use a funciton for this
         getArtistResultHtml(req, res, inputText).then(resultHtml => {
             res.send(resultHtml);
+        })
+    } else if (isString(artistId)) {
+        get.getMostPopularTracks(artistId).then(mostPopularTracks => {
+            res.send(mostPopularTracks);
         })
     } else {
         res.send('');
@@ -97,26 +106,56 @@ app.post('/', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    // const url = req.headers.referer;
-    const tracksResult = ''
+    const url = req.headers.referer;
     const inputText = req.query.q
+    let artistId
 
-    console.log("Get", inputText);
+    if (url) {
+        const match = url.match('#([^&]+)');
+        artistId = match ? match[1] : null;
+    }
 
-    // if (url) {
-    //     const match = url.match('[?&]q=([^&]+)');
-    //     inputText = match ? match[1] : null;
-    // }
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
-    if (isString(inputText)) {
-        getArtistResultHtml(req, res, inputText).then(resultHtml => {
-            res.render('index.ejs', {searchResult: resultHtml, tracksResult: tracksResult});
-        }).catch(error => {
-            res.status(500);
-            res.send(error);
-        });
-    } else {
-        res.render('index.ejs', {searchResult: '', tracksResult: tracksResult});
+    console.log("Get /:", inputText, artistId);
+
+    try {
+        if (isString(inputText)) {
+            getArtistResultHtml(req, res, inputText).then(searchResult => {
+
+                // If the artistId is also present, fetch this
+                if (isString(artistId)) {
+                    get.getMostPopularTracks(artistId).then(mostPopularTracks => {
+                        return {searchResult: searchResult, tracksResult: mostPopularTracks}
+                    })
+                } else {
+                    return {searchResult: searchResult, tracksResult: ''}
+                }
+            }).then(results => {
+                console.log("Get results 1")
+                res.render('index.ejs', results);
+            })
+        } else if (isString(artistId)) {
+            get.getMostPopularTracks(artistId).then(mostPopularTracks => {
+
+                // If the artistId is also present, fetch this
+                if (isString(artistId)) {
+                    getArtistResultHtml(req, res, inputText).then(searchResult => {
+                        return {searchResult: searchResult, tracksResult: mostPopularTracks}
+                    })
+                } else {
+                    return {searchResult: '', tracksResult: mostPopularTracks}
+                }
+            }).then(results => {
+                console.log("Get results 2")
+                res.render('index.ejs', results);
+            })
+        } else {
+            res.render('index.ejs', {searchResult: '', tracksResult: ''});
+        }
+    } catch (e) {
+        res.status(500);
+        res.send(error);
     }
 });
 

@@ -17,7 +17,7 @@
             </a>
         </div>
 
-        <form class="artist-search-input-container" action="/" method="GET">
+        <form id="artist-search-input-container" action="/" method="GET" autocomplete="off">
             <input id="artist-search-input" name="q" type="text" placeholder="Search for artist...">
             <button id="artist-name-input-submit" type="submit">
                 <img alt="Search" class="search-icon" src="/icons/search-24px.svg">
@@ -25,7 +25,7 @@
         </form>
 
         <div id="user-feedback-container">
-            <div class="user-feedback">
+            <div id="user-feedback-icons-container">
                 <img alt="The action performed is currently being loaded" id="loading-animation"
                      class="user-feedback-icon" src="/css/loading-animation.svg"
                      width="40" alt="">
@@ -34,7 +34,7 @@
                 <img alt="The action performed was not successful" id="error-icon" class="user-feedback-icon"
                      src="/icons/error_outline-24px.svg">
             </div>
-            <div class="user-feedback">
+            <div id="user-feedback-text-container">
                 <h4 id="user-feedback-title"></h4>
                 <p id="user-feedback-text"></p>
             </div>

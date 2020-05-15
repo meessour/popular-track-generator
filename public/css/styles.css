@@ -1,22 +1,31 @@
 :root {
     /* Colors */
     --black: #000;
-    --white: #fff;
-    --sky: #f0f2f0;
-
     --dark: #363636;
-    --purple: hsl(282, 44%, 40%);
-    --blue: linear-gradient(90deg, rgba(82, 45, 184, 1) 0%, rgba(28, 124, 224, 1) 100%);
-    /* --blue: hsl(204, 64%, 40%); */
-    --green: hsl(134, 61%, 40%);
-    --spotify_green: #1DB954;
-    --red: hsl(354, 70%, 40%);
+    --sky: #f0f2f0;
+    --white: #fff;
+
+    --green: #1DB954;
+    --red: #ad1f2d;
+
+    --purple: #783993;
+    --dark-blue: #203a43
 }
 
+/* Fallback should be sans-serif with letter spacing 1.7px and word spacing -1.55px */
+/** {*/
+/*    box-sizing: border-box;*/
+/*    font-family: sans-serif;*/
+/*    letter-spacing: 1.7px;*/
+/*    word-spacing: -1.55px;*/
+/*}*/
+/* When font is loaded */
 * {
     box-sizing: border-box;
-    font-family: Montserrat, Arial, sans-serif;
+
+    font-family: Montserrat, sans-serif;
     letter-spacing: 0.5px;
+    word-spacing: 0;
 }
 
 body,
@@ -66,8 +75,8 @@ p {
 #authorize {
     color: black;
 
-    border-color: var(--spotify_green);
-    background-color: var(--spotify_green);
+    border-color: var(--green);
+    background-color: var(--green);
 
     float: right;
 
@@ -239,8 +248,8 @@ p {
 
 #search-result {
     background-color: var(--sky);
-    margin-top: 2px;
-    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-bottom: 8px;
 }
 
 #most-popular-tracks {
@@ -268,7 +277,7 @@ p {
     overflow: hidden;
 }
 
-.artist-search-input-container {
+#artist-search-input-container {
     display: flex;
     flex-direction: row;
 
@@ -284,23 +293,34 @@ p {
     margin-right: 4px;
 }
 
+
 #user-feedback-container {
-    background: rgb(32, 58, 67);
-    /* Leave this at 0 so the inital state is hidden */
-    height: 0;
     display: flex;
+
+    transition: max-height 0.5s ease-in-out, margin 0.5s ease-in-out;
+
+    /* Leave this at 0 so the initial state is hidden */
+    max-height: 0;
     padding: 0 12px;
     margin: 0;
+}
+
+.show-user-feedback {
+    margin: 8px 0 !important;
 }
 
 .track-action + .track-action {
     margin-top: 0;
 }
 
-.user-feedback {
-    flex-direction: column;
-
+#user-feedback-icons-container, #user-feedback-text-container {
     align-self: center;
+    margin: 12px 0;
+}
+
+#user-feedback-text-container{
+    width: 0;
+    flex: 1;
 }
 
 #user-feedback-title,
@@ -308,6 +328,8 @@ p {
     margin: 0;
     color: var(--white);
     text-align: left;
+
+    line-height: 20px;
 }
 
 .error-color {
@@ -318,16 +340,8 @@ p {
     background-color: var(--green) !important;
 }
 
-.show-user-feedback {
-    animation: fade-in 0.5s forwards, fade-out 0.5s 3s forwards;
-}
-
-.start-loading {
-    animation: fade-in 0s forwards;
-}
-
-.loading-complete {
-    animation: show-then-fade-out 4s forwards;
+.loading-color {
+    background-color: var(--dark-blue) !important;
 }
 
 @keyframes fade-in {
@@ -352,7 +366,7 @@ p {
     }
 
     to {
-        height: 0;
+        height: fit-content;
         padding: 0 12px;
         margin: 0;
     }
