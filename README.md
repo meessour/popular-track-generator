@@ -48,8 +48,12 @@ gulp
 ```git
 npm start
 ```
+OR
+```git
+nodemon
+```
 
-**Step 5:** Navigate to: http://localhost:8080/
+**Step 5:** Navigate to: http://localhost:8000/
 
 ### Progressive Web App
 Once the install prompt of the app is stashed, it wil show a button with the text "Install app".
