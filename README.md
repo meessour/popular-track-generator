@@ -1,7 +1,7 @@
 # Popular Track Generator
 
 The code of the project used was from the 13th of march. The code from the original repo may differ. 
-[Click here to view the forked repo](https://github.com/meessour/web-app-from-scratch-1920)
+[Click here to view the forked repo](https://github.com/meessour/PopularTrackGenerator-Alpha)
 
 ## Demo
 
@@ -26,7 +26,7 @@ The code of the project used was from the 13th of march. The code from the origi
 
 **Step 1:** Clone project:
 ```git
-git clone https://github.com/meessour/progressive-web-apps-1920.git
+git clone https://github.com/meessour/PopularTrackGenerator.git
 ```
 
 **Step 2:** CD to path of the project's root:
